@@ -1,9 +1,13 @@
 package prj.fleet;
 
 public abstract class Aircraft {
+    // Flight number structure: TTXXXX where TT is the aircraft type (00, 01, 10, 11) and XXXX is the assigned number
     private int flightNumber;
     private double requiredFuel;
     private int turnaroundTime;
+
+    // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
+    private String aircraftModel;
 
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
@@ -41,4 +45,6 @@ public abstract class Aircraft {
     public void setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
     }
+
+    public abstract void generateAndAssignAircraftModel();
 }
