@@ -32,6 +32,15 @@ public abstract class Aircraft {
         return this.turnaroundTime;
     }
 
+    public String getAircraftModel() {
+        // Ensure that a null String is interpreted as an unknown model aircraft
+        if (this.aircraftModel == null) {
+            return "Unknown Model";
+        }
+
+        return this.aircraftModel;
+    }
+
     // Setter methods are set public as the "world" might change them but could be removed depending on lack of need or security of the program
 
     public void setFlightNumber(int flightNumber) {
@@ -44,6 +53,11 @@ public abstract class Aircraft {
 
     public void setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
+    }
+
+    // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
+    void setAircraftModel(String aircraftModel) {
+        this.aircraftModel = aircraftModel;
     }
 
     public abstract void generateAndAssignAircraftModel();
