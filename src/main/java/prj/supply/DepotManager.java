@@ -15,16 +15,28 @@ public class DepotManager {
     private final int INITIAL_LUGGAGE = 1000; // In # of Units
     private final int INITIAL_MONEY = 20000; // In Manats
 
-    // Default amount for each resource when re-stocking to be used in the EnumMap for buyResource method
+    // Default purchase amount for each resource
     private final int FUEL_BUY_AMOUNT = 10000;
     private final int MEAL_BUY_AMOUNT = 2000;
     private final int LUGGAGE_BUY_AMOUNT = 250;
 
-    // TODO: Find a way to initialize the EnumMap at the time of declaration
+    // Use EnumMap since it is meant to work with Enum, Value maps and initialize an unmodifiable map to store default purchase amount values
     private final Map<SupplyItem, Integer> defaultResourceBuyAmount = new EnumMap<>(Map.of(
             SupplyItem.FUEL, FUEL_BUY_AMOUNT,
             SupplyItem.MEAL, MEAL_BUY_AMOUNT,
             SupplyItem.LUGGAGE_CART, LUGGAGE_BUY_AMOUNT
+    ));
+
+    // Price for each resource per defined default amount (in manats)
+    private final int FUEL_PRICE = 5000;
+    private final int MEAL_PRICE = 3000;
+    private final int LUGGAGE_PRICE = 1000;
+
+    // Use EnumMap to create an unmodifiable resource to price pair to be used by buyResource method
+    private final Map<SupplyItem, Integer> resourcePrice = new EnumMap<>(Map.of(
+            SupplyItem.FUEL, FUEL_PRICE,
+            SupplyItem.MEAL, MEAL_PRICE,
+            SupplyItem.LUGGAGE_CART, LUGGAGE_PRICE
     ));
 
     public DepotManager() {
@@ -52,8 +64,16 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, airportSupply.get(SupplyItem.MONEY) + amount);
     }
 
-    // TODO: Finish the method
-    public void buyResource(SupplyItem item) {
-        airportSupply.put(item, airportSupply.get(item) + defaultResourceBuyAmount.get(item));
+    public boolean buyResource(SupplyItem item) {
+        if (resourcePrice.get(item) < airportSupply.get(SupplyItem.MONEY)) {
+            airportSupply.put(item, airportSupply.get(item) + defaultResourceBuyAmount.get(item));
+            airportSupply.put(SupplyItem.MONEY, airportSupply.get(SupplyItem.MONEY) - resourcePrice.get(item));
+
+            // true indicates a successful purchase and shall be reflected in the radio
+            return true;
+        }
+
+        // false indicates lack of money to purchase the resource and shall put out an ERROR in the radio
+        return false;
     }
 }
