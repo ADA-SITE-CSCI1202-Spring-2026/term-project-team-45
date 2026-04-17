@@ -5,8 +5,8 @@ import java.util.Random;
 public class PrivateCharter extends Aircraft {
     private int vipPassengers;
 
-    public PrivateCharter(int flightNumber, double requiredFuel, int turnaroundTime,int vipPassengers){
-        super(flightNumber, requiredFuel, turnaroundTime);
+    public PrivateCharter(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage,int vipPassengers){
+        super(flightNumber, requiredFuel, turnaroundTime,requiredMeals,requiredBaggage);
         this.vipPassengers=vipPassengers;
     }
 
@@ -26,3 +26,4 @@ public class PrivateCharter extends Aircraft {
         setAircraftModel(modelList[listNumber]);
     }
 }
+

@@ -6,8 +6,8 @@ public class CommercialJet extends Aircraft {
     private int passengerAmount;
 
 
-    protected CommercialJet(int flightNumber, double requiredFuel, int turnaroundTime, int passengerAmount) {
-        super(flightNumber, requiredFuel, turnaroundTime);
+    protected CommercialJet(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage, int passengerAmount) {
+        super(flightNumber, requiredFuel, turnaroundTime, requiredMeals,requiredBaggage);
         this.passengerAmount = passengerAmount;
     }
 
@@ -24,7 +24,6 @@ public class CommercialJet extends Aircraft {
         // Generate a number between 0 and size of the array to be used to index the array
         Random random = new Random();
         int listNumber = random.nextInt(modelList.length);
-
         // Assign the model at the index as the model of the aircraft
         setAircraftModel(modelList[listNumber]);
     }
