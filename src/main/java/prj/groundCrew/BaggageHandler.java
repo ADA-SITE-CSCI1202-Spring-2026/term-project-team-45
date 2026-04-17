@@ -1,4 +1,4 @@
-package groundCrew;
+package prj.groundCrew;
 
 import prj.fleet.Aircraft;
 
