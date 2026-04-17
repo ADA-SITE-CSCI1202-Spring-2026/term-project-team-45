@@ -5,17 +5,20 @@ public abstract class Aircraft {
     private int flightNumber;
     private double requiredFuel;
     private int turnaroundTime;
-
+    private  int requiredMeals;
+    private int requiredBaggage;
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
 
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    protected Aircraft(int flightNumber, double requiredFuel, int turnaroundTime) {
+    protected Aircraft(int flightNumber, double requiredFuel, int turnaroundTime, int requiredMeals,int requiredBaggage) {
         this.flightNumber = flightNumber;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
+        this.requiredMeals=requiredMeals;
+        this.requiredBaggage=requiredBaggage;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -30,6 +33,14 @@ public abstract class Aircraft {
 
     public int getTurnaroundTime() {
         return this.turnaroundTime;
+    }
+
+    public int getRequiredMeals() {
+        return requiredMeals;
+    }
+
+    public int getRequiredBaggage() {
+        return requiredBaggage;
     }
 
     public String getAircraftModel() {
@@ -55,10 +66,20 @@ public abstract class Aircraft {
         this.turnaroundTime = turnaroundTime;
     }
 
+    public void setRequiredMeals(int requiredMeals) {
+        this.requiredMeals = requiredMeals;
+    }
+
+    public void setRequiredBaggage(int requiredBaggage) {
+        this.requiredBaggage = requiredBaggage;
+    }
+
     // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
     void setAircraftModel(String aircraftModel) {
         this.aircraftModel = aircraftModel;
     }
 
     public abstract void generateAndAssignAircraftModel();
+
+
 }

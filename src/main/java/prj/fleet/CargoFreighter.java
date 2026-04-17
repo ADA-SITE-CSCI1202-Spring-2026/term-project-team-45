@@ -5,8 +5,8 @@ import java.util.Random;
 public class CargoFreighter extends Aircraft {
     private int weightLimit;
 
-    public CargoFreighter(int flightNumber, double requiredFuel, int turnaroundTime,int weightLimit){
-        super(flightNumber, requiredFuel, turnaroundTime);
+    public CargoFreighter(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage,int weightLimit){
+        super(flightNumber, requiredFuel, turnaroundTime,requiredMeals,requiredBaggage);
         this.weightLimit=weightLimit;
     }
 
