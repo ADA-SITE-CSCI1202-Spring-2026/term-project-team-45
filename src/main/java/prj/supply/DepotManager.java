@@ -46,17 +46,15 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
-    // Double-purposed function: Check if resource deduction is possible and deduct if possible
-    public boolean CheckAndDeductResource(SupplyItem item, int amount) {
-        if (airportSupply.get(item) - amount > 0) {
+    // Check to see there is enough of the resource in the supply before it is to be consumed
+    public boolean checkResourceSupply(SupplyItem item, int amount) {
+        return airportSupply.get(item) >= amount;
+    }
+
+    public void deductResource(SupplyItem item, int amount) {
+        if (checkResourceSupply(item, amount)) {
             airportSupply.put(item, airportSupply.get(item) - amount);
-
-            // use the return keyword in GUI to send ERROR message to radio if not possible
-            // true means resource deduction possible
-            return true;
         }
-
-        return false;
     }
 
     // To be used when a successful processing takes place
@@ -65,7 +63,7 @@ public class DepotManager {
     }
 
     public boolean buyResource(SupplyItem item) {
-        if (resourcePrice.get(item) < airportSupply.get(SupplyItem.MONEY)) {
+        if (resourcePrice.get(item) <= airportSupply.get(SupplyItem.MONEY)) {
             airportSupply.put(item, airportSupply.get(item) + defaultResourceBuyAmount.get(item));
             airportSupply.put(SupplyItem.MONEY, airportSupply.get(SupplyItem.MONEY) - resourcePrice.get(item));
 
