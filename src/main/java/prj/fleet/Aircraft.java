@@ -1,24 +1,26 @@
 package prj.fleet;
 
 public abstract class Aircraft {
-    // Flight number structure: TTXXXX where TT is the aircraft type (00, 01, 10, 11) and XXXX is the assigned number
     private int flightNumber;
-    private double requiredFuel;
+    private static int idGenerator = 1;
+
+    private int requiredFuel;
     private int turnaroundTime;
-    private  int requiredMeals;
+    private int requiredMeals;
     private int requiredBaggage;
+
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
 
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    protected Aircraft(int flightNumber, double requiredFuel, int turnaroundTime, int requiredMeals,int requiredBaggage) {
-        this.flightNumber = flightNumber;
+    public Aircraft(int requiredFuel, int turnaroundTime, int requiredMeals, int requiredBaggage) {
+        this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
-        this.requiredMeals=requiredMeals;
-        this.requiredBaggage=requiredBaggage;
+        this.requiredMeals = requiredMeals;
+        this.requiredBaggage = requiredBaggage;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -58,7 +60,7 @@ public abstract class Aircraft {
         this.flightNumber = flightNumber;
     }
 
-    public void setRequiredFuel(double requiredFuel) {
+    public void setRequiredFuel(int requiredFuel) {
         this.requiredFuel = requiredFuel;
     }
 
@@ -80,6 +82,4 @@ public abstract class Aircraft {
     }
 
     public abstract void generateAndAssignAircraftModel();
-
-
 }
