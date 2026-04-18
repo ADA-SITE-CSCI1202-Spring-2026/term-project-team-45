@@ -1,7 +1,5 @@
 package prj.supply;
 
-import prj.fleet.Aircraft;
-
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.HashMap;
@@ -46,17 +44,31 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
-    // Double-purposed function: Check if resource deduction is possible and deduct if possible
-    public boolean CheckAndDeductResource(SupplyItem item, int amount) {
-        if (airportSupply.get(item) - amount > 0) {
+    public int getFuelAmount() {
+        return airportSupply.get(SupplyItem.FUEL);
+    }
+
+    public int getMealAmount() {
+        return airportSupply.get(SupplyItem.MEAL);
+    }
+
+    public int getLuggageAmount() {
+        return airportSupply.get(SupplyItem.LUGGAGE_CART);
+    }
+
+    public int getMoneyAmount() {
+        return airportSupply.get(SupplyItem.MONEY);
+    }
+
+    // Check to see there is enough of the resource in the supply before it is to be consumed
+    public boolean checkResourceSupply(SupplyItem item, int amount) {
+        return airportSupply.get(item) >= amount;
+    }
+
+    public void deductResource(SupplyItem item, int amount) {
+        if (checkResourceSupply(item, amount)) {
             airportSupply.put(item, airportSupply.get(item) - amount);
-
-            // use the return keyword in GUI to send ERROR message to radio if not possible
-            // true means resource deduction possible
-            return true;
         }
-
-        return false;
     }
 
     // To be used when a successful processing takes place
@@ -65,7 +77,7 @@ public class DepotManager {
     }
 
     public boolean buyResource(SupplyItem item) {
-        if (resourcePrice.get(item) < airportSupply.get(SupplyItem.MONEY)) {
+        if (resourcePrice.get(item) <= airportSupply.get(SupplyItem.MONEY)) {
             airportSupply.put(item, airportSupply.get(item) + defaultResourceBuyAmount.get(item));
             airportSupply.put(SupplyItem.MONEY, airportSupply.get(SupplyItem.MONEY) - resourcePrice.get(item));
 
@@ -76,4 +88,7 @@ public class DepotManager {
         // false indicates lack of money to purchase the resource and shall put out an ERROR in the radio
         return false;
     }
+
+    // TODO: Implement Java Swing components to the DepotManage methods in order to allow the methods to update text on GUI
+    // TODO: Implement the Java Swing components without using
 }

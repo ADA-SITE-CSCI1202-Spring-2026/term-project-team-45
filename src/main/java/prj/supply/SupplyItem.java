@@ -1,6 +1,6 @@
 package prj.supply;
 
-enum SupplyItem {
+public enum SupplyItem {
     FUEL,
     MEAL,
     LUGGAGE_CART,

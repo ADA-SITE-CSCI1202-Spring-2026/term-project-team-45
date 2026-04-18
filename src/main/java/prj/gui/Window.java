@@ -13,9 +13,14 @@ public class Window extends JFrame {
         setLayout(new GridLayout(2, 2));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        add(new QueueZone(width, height));
-        add(new SupplyZone());
-        add(new RadioZone(width, height));
-        add(new DepotZone());
+        QueueZone queueZone = new QueueZone(width, height);
+        SupplyZone supplyZone = new SupplyZone();
+        RadioZone radioZone = new RadioZone(width, height);
+        DepotZone depotZone = new DepotZone();
+
+        add(queueZone);
+        add(supplyZone);
+        add(radioZone);
+        add(depotZone);
     }
 }
