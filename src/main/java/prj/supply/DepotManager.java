@@ -1,7 +1,5 @@
 package prj.supply;
 
-import prj.fleet.Aircraft;
-
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.HashMap;
@@ -46,6 +44,22 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
+    public int getFuelAmount() {
+        return airportSupply.get(SupplyItem.FUEL);
+    }
+
+    public int getMealAmount() {
+        return airportSupply.get(SupplyItem.MEAL);
+    }
+
+    public int getLuggageAmount() {
+        return airportSupply.get(SupplyItem.LUGGAGE_CART);
+    }
+
+    public int getMoneyAmount() {
+        return airportSupply.get(SupplyItem.MONEY);
+    }
+
     // Check to see there is enough of the resource in the supply before it is to be consumed
     public boolean checkResourceSupply(SupplyItem item, int amount) {
         return airportSupply.get(item) >= amount;
@@ -74,4 +88,7 @@ public class DepotManager {
         // false indicates lack of money to purchase the resource and shall put out an ERROR in the radio
         return false;
     }
+
+    // TODO: Implement Java Swing components to the DepotManage methods in order to allow the methods to update text on GUI
+    // TODO: Implement the Java Swing components without using
 }
