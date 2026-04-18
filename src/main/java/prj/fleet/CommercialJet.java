@@ -3,19 +3,20 @@ package prj.fleet;
 import java.util.Random;
 
 public class CommercialJet extends Aircraft {
-    private int passengerAmount;
+    private int requiredMeals;
 
-
-    protected CommercialJet(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage, int passengerAmount) {
-        super(flightNumber, requiredFuel, turnaroundTime, requiredMeals,requiredBaggage);
-        this.passengerAmount = passengerAmount;
+    public CommercialJet(int requiredFuel, int turnaroundTime, int requiredBaggage, int requiredMeals) {
+        super(requiredFuel, turnaroundTime, requiredBaggage);
+        this.requiredMeals = requiredMeals;
     }
 
-    public int getPassengerAmount() {
-        return this.passengerAmount;
+    public int getRequiredMeals() {
+        return requiredMeals;
     }
 
-    // Setter is not created for passenger amount as it should not be configurable after creation of the commercial jet
+    public void setRequiredMeals(int requiredMeals) {
+        this.requiredMeals = requiredMeals;
+    }
 
     @Override
     public void generateAndAssignAircraftModel() {
