@@ -6,7 +6,6 @@ public abstract class Aircraft {
 
     private int requiredFuel;
     private int turnaroundTime;
-    private int requiredMeals;
     private int requiredBaggage;
 
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
@@ -15,11 +14,10 @@ public abstract class Aircraft {
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    public Aircraft(int requiredFuel, int turnaroundTime, int requiredMeals, int requiredBaggage) {
+    public Aircraft(int requiredFuel, int turnaroundTime, int requiredBaggage) {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
-        this.requiredMeals = requiredMeals;
         this.requiredBaggage = requiredBaggage;
     }
 
@@ -35,10 +33,6 @@ public abstract class Aircraft {
 
     public int getTurnaroundTime() {
         return this.turnaroundTime;
-    }
-
-    public int getRequiredMeals() {
-        return requiredMeals;
     }
 
     public int getRequiredBaggage() {
@@ -66,10 +60,6 @@ public abstract class Aircraft {
 
     public void setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
-    }
-
-    public void setRequiredMeals(int requiredMeals) {
-        this.requiredMeals = requiredMeals;
     }
 
     public void setRequiredBaggage(int requiredBaggage) {
