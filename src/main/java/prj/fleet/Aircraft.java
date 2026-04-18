@@ -29,7 +29,7 @@ public abstract class Aircraft {
         return this.flightNumber;
     }
 
-    public double getRequiredFuel() {
+    public int getRequiredFuel() {
         return this.requiredFuel;
     }
 
