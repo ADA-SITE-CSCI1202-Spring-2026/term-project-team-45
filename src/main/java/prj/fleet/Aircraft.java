@@ -1,12 +1,17 @@
 package prj.fleet;
 
+import prj.supply.SupplyItem;
+
+import java.util.Map;
+
 public abstract class Aircraft {
     private int flightNumber;
     private static int idGenerator = 1;
 
     private int requiredFuel;
     private int turnaroundTime;
-    private int requiredBaggage;
+    private int requiredCrew;
+
 
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
@@ -14,11 +19,11 @@ public abstract class Aircraft {
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    public Aircraft(int requiredFuel, int turnaroundTime, int requiredBaggage) {
+    public Aircraft(int requiredFuel, int turnaroundTime, int requiredCrew) {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
-        this.requiredBaggage = requiredBaggage;
+        this.requiredCrew=requiredCrew;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -35,9 +40,8 @@ public abstract class Aircraft {
         return this.turnaroundTime;
     }
 
-    public int getRequiredBaggage() {
-        return requiredBaggage;
-    }
+
+    public int getRequiredCrew(){ return this.requiredCrew;}
 
     public String getAircraftModel() {
         // Ensure that a null String is interpreted as an unknown model aircraft
@@ -62,9 +66,11 @@ public abstract class Aircraft {
         this.turnaroundTime = turnaroundTime;
     }
 
-    public void setRequiredBaggage(int requiredBaggage) {
-        this.requiredBaggage = requiredBaggage;
+    public void setRequiredCrew(int requiredBaggage) {
+        this.requiredCrew = requiredCrew;
     }
+
+
 
     // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
     void setAircraftModel(String aircraftModel) {
@@ -72,4 +78,5 @@ public abstract class Aircraft {
     }
 
     public abstract void generateAndAssignAircraftModel();
+    public abstract Map<SupplyItem,Integer> getResources();
 }
