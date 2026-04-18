@@ -2,16 +2,10 @@ package prj.fleet;
 
 import java.util.Random;
 
-public class PrivateCharter extends Aircraft {
-    private int vipPassengers;
+public class PrivateCharter extends CommercialJet {
 
-    public PrivateCharter(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage,int vipPassengers){
-        super(flightNumber, requiredFuel, turnaroundTime,requiredMeals,requiredBaggage);
-        this.vipPassengers=vipPassengers;
-    }
-
-    public int getVipPassengers(){
-        return this.vipPassengers;
+    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredBaggage, int requiredMeals){
+        super(requiredFuel, turnaroundTime, requiredBaggage, requiredMeals);
     }
 
     @Override
