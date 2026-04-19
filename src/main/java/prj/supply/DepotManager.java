@@ -60,6 +60,11 @@ public class DepotManager {
         return airportSupply.get(SupplyItem.MONEY);
     }
 
+    // More flexible helper getter to get any resource amount
+    public int getResourceAmount(SupplyItem item) {
+        return airportSupply.get(item);
+    }
+
     // Check to see there is enough of the resource in the supply before it is to be consumed
     public boolean checkResourceSupply(SupplyItem item, int amount) {
         return airportSupply.get(item) >= amount;
@@ -88,7 +93,4 @@ public class DepotManager {
         // false indicates lack of money to purchase the resource and shall put out an ERROR in the radio
         return false;
     }
-
-    // TODO: Implement Java Swing components to the DepotManage methods in order to allow the methods to update text on GUI
-    // TODO: Implement the Java Swing components without using
 }
