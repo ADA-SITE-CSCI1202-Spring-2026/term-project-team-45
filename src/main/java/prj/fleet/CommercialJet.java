@@ -1,21 +1,36 @@
 package prj.fleet;
 
+import prj.supply.SupplyItem;
+
+import java.util.Map;
 import java.util.Random;
 
 public class CommercialJet extends Aircraft {
-    private int requiredMeals;
+    private int requiredBaggage;
+    private int requiredRations;  //meal
 
-    public CommercialJet(int requiredFuel, int turnaroundTime, int requiredBaggage, int requiredMeals) {
-        super(requiredFuel, turnaroundTime, requiredBaggage);
-        this.requiredMeals = requiredMeals;
+    public CommercialJet(int requiredFuel, int turnaroundTime,int requiredCrew) {
+        super(requiredFuel, turnaroundTime, requiredCrew);
+        this.requiredBaggage=requiredBaggage;
+        this.requiredRations=requiredRations;
+
     }
 
-    public int getRequiredMeals() {
-        return requiredMeals;
+    public int getRequiredBaggage() {
+        return requiredBaggage;
     }
 
-    public void setRequiredMeals(int requiredMeals) {
-        this.requiredMeals = requiredMeals;
+    public int getRequiredRations() {
+        return requiredRations;
+    }
+
+
+    public void setRequiredBaggage(int requiredBaggage) {
+        this.requiredBaggage = requiredBaggage;
+    }
+
+    public void setRequiredRations(int requiredRations) {
+        this.requiredRations = requiredRations;
     }
 
     @Override
@@ -28,4 +43,10 @@ public class CommercialJet extends Aircraft {
         // Assign the model at the index as the model of the aircraft
         setAircraftModel(modelList[listNumber]);
     }
+    @Override
+    public Map<SupplyItem,Integer> getResources(){
+        return Map.of(SupplyItem.FUEL,getRequiredFuel(),SupplyItem.CREW,
+                getRequiredCrew(),SupplyItem.MEAL, requiredRations,SupplyItem.LUGGAGE_CART,requiredBaggage);
+    }
 }
+

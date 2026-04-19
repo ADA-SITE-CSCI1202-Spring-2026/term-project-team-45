@@ -1,17 +1,24 @@
 package prj.fleet;
 
+import prj.supply.SupplyItem;
+
+import java.util.Map;
 import java.util.Random;
 
 public class CargoFreighter extends Aircraft {
-    private int weightLimit;
+    private int requiredCargoItems;
 
-    public CargoFreighter(int flightNumber, double requiredFuel, int turnaroundTime,int requiredMeals,int requiredBaggage,int weightLimit){
-        super(flightNumber, requiredFuel, turnaroundTime,requiredMeals,requiredBaggage);
-        this.weightLimit=weightLimit;
+    public CargoFreighter(int requiredFuel, int turnaroundTime,int requiredCrew,int requiredCargoItems){
+        super(requiredFuel, turnaroundTime,requiredCrew);
+        this.requiredCargoItems=requiredCargoItems;
     }
 
-    public int getWeightLimit(){
-        return this.weightLimit;
+    public int getRequiredCargoItems(){
+        return this.requiredCargoItems;
+    }
+
+    public void setRequiredCargoItems(int requiredCargoItems) {
+        this.requiredCargoItems = requiredCargoItems;
     }
 
     @Override
@@ -24,6 +31,12 @@ public class CargoFreighter extends Aircraft {
 
         // Assign the model at the index as the model of the aircraft
         setAircraftModel(modelList[listNumber]);
+    }
+
+    @Override
+    public Map<SupplyItem,Integer> getResources(){
+        return Map.of(SupplyItem.FUEL,getRequiredFuel(),SupplyItem.CREW,
+                getRequiredCrew(),SupplyItem.CARGO,requiredCargoItems );
     }
 
 

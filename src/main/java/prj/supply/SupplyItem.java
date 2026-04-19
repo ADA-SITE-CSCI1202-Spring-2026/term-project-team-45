@@ -4,5 +4,8 @@ public enum SupplyItem {
     FUEL,
     MEAL,
     LUGGAGE_CART,
-    MONEY
+    MONEY,
+    CREW,
+    LUXURY_ITEMS,
+    CARGO
 }
