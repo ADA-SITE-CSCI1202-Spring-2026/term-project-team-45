@@ -3,9 +3,9 @@ package prj.supply;
 public enum SupplyItem {
     FUEL,
     MEAL,
-    LUGGAGE_CART,
-    MONEY,
+    LUGGAGE,
+    CARGO,
+    LUXURY_MEAL,
     CREW,
-    LUXURY_ITEMS,
-    CARGO
+    MONEY
 }
