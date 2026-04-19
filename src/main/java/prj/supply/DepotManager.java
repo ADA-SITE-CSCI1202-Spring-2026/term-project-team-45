@@ -58,7 +58,7 @@ public class DepotManager {
         airportSupply.put(SupplyItem.LUGGAGE, INITIAL_LUGGAGE);
         airportSupply.put(SupplyItem.CARGO, INITIAL_CARGO);
         airportSupply.put(SupplyItem.LUXURY_MEAL, INITIAL_LUXURY_MEAL);
-        airportSupply.put(SupplyItem.CREW, CREW_PRICE);
+        airportSupply.put(SupplyItem.CREW, INITIAL_CREW);
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
