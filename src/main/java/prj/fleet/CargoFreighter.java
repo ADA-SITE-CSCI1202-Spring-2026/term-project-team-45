@@ -23,7 +23,7 @@ public class CargoFreighter extends Aircraft {
 
     @Override
     public void generateAndAssignAircraftModel() {
-        String[] modelList = {"Boeing 747-8F", "Antonov An-124 Ruslan", "Airbus A330-200F", "Boeing 777F", "ACessna 208 Caravan Cargo"};
+        String[] modelList = {"Boeing 747-8F", "Antonov An-124 Ruslan", "Airbus A330-200F", "Boeing 777F", "Cessna 208 Caravan Cargo"};
 
         // Generate a number between 0 and size of the array to be used to index the array
         Random random = new Random();

@@ -44,7 +44,7 @@ public class CommercialJet extends Aircraft {
 
     @Override
     public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, requiredRations, SupplyItem.LUGGAGE_CART, requiredBaggage);
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, requiredRations, SupplyItem.LUGGAGE, requiredBaggage);
     }
 }
 

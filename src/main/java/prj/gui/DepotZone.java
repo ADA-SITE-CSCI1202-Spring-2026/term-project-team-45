@@ -17,7 +17,10 @@ public class DepotZone extends JPanel {
         // The given Strings to the labels are temporary as they will be overridden by the Controller
         resourceMap.put(SupplyItem.FUEL, new JLabel("Fuel"));
         resourceMap.put(SupplyItem.MEAL, new JLabel("Meal"));
-        resourceMap.put(SupplyItem.LUGGAGE_CART, new JLabel("Luggage"));
+        resourceMap.put(SupplyItem.LUGGAGE, new JLabel("Luggage"));
+        resourceMap.put(SupplyItem.CARGO, new JLabel("Cargo"));
+        resourceMap.put(SupplyItem.LUXURY_MEAL, new JLabel("Luxury Meal"));
+        resourceMap.put(SupplyItem.CREW, new JLabel("Crew"));
         resourceMap.put(SupplyItem.MONEY, new JLabel("Money"));
 
         // Quickly iterate over the map to assign each label a font size and boldness rather than waste space writing individually
@@ -31,7 +34,10 @@ public class DepotZone extends JPanel {
         switch (item) {
             case SupplyItem.FUEL -> resourceMap.get(item).setText("Fuel: " + value);
             case SupplyItem.MEAL -> resourceMap.get(item).setText("Meal: " + value);
-            case SupplyItem.LUGGAGE_CART -> resourceMap.get(item).setText("Luggage: " + value);
+            case SupplyItem.LUGGAGE -> resourceMap.get(item).setText("Luggage: " + value);
+            case SupplyItem.CARGO -> resourceMap.get(item).setText("Cargo: " + value);
+            case SupplyItem.LUXURY_MEAL -> resourceMap.get(item).setText("Luxury Meal: " + value);
+            case SupplyItem.CREW -> resourceMap.get(item).setText("Crew: " + value);
             case SupplyItem.MONEY -> resourceMap.get(item).setText("Money: " + value);
             default -> {}
         }

@@ -28,7 +28,7 @@ public class Controller {
         this.supplyGUI.getPurchaseButton().addActionListener(e -> ControlAndUpdateResourcePurchaseControl());
     }
 
-    // This method is meant to ensure that when a resource is purchased the supply text is updated and and either a success or error message is sent to radio log
+    // This method is meant to ensure that when a resource is purchased the supply text is updated and either a success or error message is sent to radio log
     public void ControlAndUpdateResourcePurchaseControl() {
         if (depotManager.buyResource((SupplyItem) supplyGUI.getResourcePurchaseMenu().getSelectedItem())) {
             depotGUI.setResourceLabelValue((SupplyItem) supplyGUI.getResourcePurchaseMenu().getSelectedItem(), depotManager.getResourceAmount((SupplyItem) supplyGUI.getResourcePurchaseMenu().getSelectedItem()));
