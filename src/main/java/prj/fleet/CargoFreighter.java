@@ -6,19 +6,19 @@ import java.util.Map;
 import java.util.Random;
 
 public class CargoFreighter extends Aircraft {
-    private int requiredCargoItems;
+    private int requiredCargoCrates;
 
-    public CargoFreighter(int requiredFuel, int turnaroundTime,int requiredCrew,int requiredCargoItems){
-        super(requiredFuel, turnaroundTime,requiredCrew);
-        this.requiredCargoItems=requiredCargoItems;
+    public CargoFreighter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredCargoCrates) {
+        super(requiredFuel, turnaroundTime, requiredCrew);
+        this.requiredCargoCrates = requiredCargoCrates;
     }
 
-    public int getRequiredCargoItems(){
-        return this.requiredCargoItems;
+    public int getRequiredCargoCrates() {
+        return this.requiredCargoCrates;
     }
 
-    public void setRequiredCargoItems(int requiredCargoItems) {
-        this.requiredCargoItems = requiredCargoItems;
+    public void setRequiredCargoCrates(int requiredCargoCrates) {
+        this.requiredCargoCrates = requiredCargoCrates;
     }
 
     @Override
@@ -34,12 +34,7 @@ public class CargoFreighter extends Aircraft {
     }
 
     @Override
-    public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL,getRequiredFuel(),SupplyItem.CREW,
-                getRequiredCrew(),SupplyItem.CARGO,requiredCargoItems );
+    public Map<SupplyItem,Integer> getResources() {
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.CARGO, requiredCargoCrates);
     }
-
-
-
-
 }

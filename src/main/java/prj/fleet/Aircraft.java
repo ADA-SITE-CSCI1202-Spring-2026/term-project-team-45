@@ -23,7 +23,7 @@ public abstract class Aircraft {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
-        this.requiredCrew=requiredCrew;
+        this.requiredCrew = requiredCrew;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -40,8 +40,9 @@ public abstract class Aircraft {
         return this.turnaroundTime;
     }
 
-
-    public int getRequiredCrew(){ return this.requiredCrew;}
+    public int getRequiredCrew() {
+        return this.requiredCrew;
+    }
 
     public String getAircraftModel() {
         // Ensure that a null String is interpreted as an unknown model aircraft
@@ -66,11 +67,9 @@ public abstract class Aircraft {
         this.turnaroundTime = turnaroundTime;
     }
 
-    public void setRequiredCrew(int requiredBaggage) {
+    public void setRequiredCrew(int requiredCrew) {
         this.requiredCrew = requiredCrew;
     }
-
-
 
     // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
     void setAircraftModel(String aircraftModel) {
