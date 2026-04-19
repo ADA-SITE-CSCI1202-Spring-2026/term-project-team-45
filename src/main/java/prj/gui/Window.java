@@ -1,5 +1,7 @@
 package prj.gui;
 
+import prj.supply.DepotManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,10 +15,14 @@ public class Window extends JFrame {
         setLayout(new GridLayout(2, 2));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        DepotManager depotManager = new DepotManager(); // initialize the central depot manager to be represented by the GUI
+
         QueueZone queueZone = new QueueZone(width, height);
         SupplyZone supplyZone = new SupplyZone();
         RadioZone radioZone = new RadioZone(width, height);
         DepotZone depotZone = new DepotZone();
+
+        Controller controller = new Controller(depotManager, queueZone, supplyZone, radioZone, depotZone);
 
         add(queueZone);
         add(supplyZone);
