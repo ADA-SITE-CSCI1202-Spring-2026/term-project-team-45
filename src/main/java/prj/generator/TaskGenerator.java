@@ -37,9 +37,9 @@ public class TaskGenerator {
 
     public void generateAndAddAircraftTask() {
         switch(rr.nextInt(3)) {
-            case 0 -> flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401)));
-            case 1 -> flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(501)));
-            case 2 -> flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(51)));
+            case 0 -> flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(25000, 35000)));
+            case 1 -> flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(501), rr.nextInt(25000, 35000)));
+            case 2 -> flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(51), rr.nextInt(25000, 35000)));
         }
     }
 
