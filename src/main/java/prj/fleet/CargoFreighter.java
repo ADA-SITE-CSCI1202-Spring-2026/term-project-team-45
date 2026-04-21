@@ -17,10 +17,6 @@ public class CargoFreighter extends Aircraft {
         return this.requiredCargoCrates;
     }
 
-    public void setRequiredCargoCrates(int requiredCargoCrates) {
-        this.requiredCargoCrates = requiredCargoCrates;
-    }
-
     @Override
     public void generateAndAssignAircraftModel() {
         String[] modelList = {"Boeing 747-8F", "Antonov An-124 Ruslan", "Airbus A330-200F", "Boeing 777F", "Cessna 208 Caravan Cargo"};

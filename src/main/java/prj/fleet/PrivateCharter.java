@@ -17,10 +17,6 @@ public class PrivateCharter extends CommercialJet {
         return this.requiredPremiumRations;
     }
 
-    public void setRequiredPremiumRations(int requiredPremiumRations) {
-        this.requiredPremiumRations = requiredPremiumRations;
-    }
-
     @Override
     public void generateAndAssignAircraftModel() {
         String[] modelList = {"Gulfstream G650", "Bombardier Global 7500", "Dassault Falcon 8X", "Embraer Praetor 600", "Cessna Citation Longitude"};

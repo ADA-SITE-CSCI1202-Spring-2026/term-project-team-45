@@ -23,14 +23,6 @@ public class CommercialJet extends Aircraft {
         return this.requiredRations;
     }
 
-    public void setRequiredBaggage(int requiredBaggage) {
-        this.requiredBaggage = requiredBaggage;
-    }
-
-    public void setRequiredRations(int requiredRations) {
-        this.requiredRations = requiredRations;
-    }
-
     @Override
     public void generateAndAssignAircraftModel() {
         String[] modelList = {"Boeing 737", "Airbus A320neo", "Boeing 787-8", "Embraer E-190", "Airbus A319-100"};
