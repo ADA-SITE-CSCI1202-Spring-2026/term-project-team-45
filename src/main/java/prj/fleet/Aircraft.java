@@ -66,10 +66,20 @@ public abstract class Aircraft {
     public String generateDemandedResources() {
         SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.MEAL, SupplyItem.CREW, SupplyItem.CARGO, SupplyItem.LUXURY_MEAL, SupplyItem.LUGGAGE};
         StringBuilder requiredResourcesText = new StringBuilder();
+        String EnumToString = "";
 
         for (SupplyItem item: tempResourcesList) {
             if (getResources().get(item) != null && getResources().get(item) > 0) {
-                requiredResourcesText.append(item).append(": ").append(getResources().get(item)).append(" ");
+                switch (item) {
+                    case SupplyItem.FUEL -> EnumToString = "Fuel";
+                    case SupplyItem.MEAL -> EnumToString = "Meal";
+                    case SupplyItem.CARGO -> EnumToString = "Cargo";
+                    case SupplyItem.CREW -> EnumToString = "Crew";
+                    case SupplyItem.LUGGAGE -> EnumToString = "Luggage";
+                    case SupplyItem.LUXURY_MEAL -> EnumToString = "Luxury Meal";
+                }
+
+                requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
             }
         }
 
@@ -77,4 +87,5 @@ public abstract class Aircraft {
     }
 
     public abstract void generateAndAssignAircraftModel();
+    public abstract String getAircraftType();
 }

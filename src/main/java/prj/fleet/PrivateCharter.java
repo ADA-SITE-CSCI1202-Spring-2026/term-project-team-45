@@ -30,6 +30,11 @@ public class PrivateCharter extends CommercialJet {
     }
 
     @Override
+    public String getAircraftType() {
+        return "Private Charter";
+    }
+
+    @Override
     public Map<SupplyItem,Integer> getResources(){
         return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, getRequiredRations(), SupplyItem.LUGGAGE, getRequiredBaggage(), SupplyItem.LUXURY_MEAL, requiredPremiumRations);
     }

@@ -30,6 +30,11 @@ public class CargoFreighter extends Aircraft {
     }
 
     @Override
+    public String getAircraftType() {
+        return "Cargo Freighter";
+    }
+
+    @Override
     public Map<SupplyItem,Integer> getResources() {
         return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.CARGO, requiredCargoCrates);
     }
