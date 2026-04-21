@@ -11,6 +11,7 @@ public abstract class Aircraft {
     private int requiredFuel;
     private int turnaroundTime;
     private int requiredCrew;
+    private int revenueGenerated;
 
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
@@ -18,11 +19,12 @@ public abstract class Aircraft {
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    public Aircraft(int requiredFuel, int turnaroundTime, int requiredCrew) {
+    public Aircraft(int requiredFuel, int turnaroundTime, int requiredCrew, int revenueGenerated) {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
         this.requiredCrew = requiredCrew;
+        this.revenueGenerated = revenueGenerated;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -41,6 +43,10 @@ public abstract class Aircraft {
 
     public int getRequiredCrew() {
         return this.requiredCrew;
+    }
+
+    public int getRevenueGenerated() {
+        return this.revenueGenerated;
     }
 
     public String getAircraftModel() {

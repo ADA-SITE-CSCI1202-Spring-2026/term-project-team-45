@@ -8,8 +8,8 @@ import java.util.Random;
 public class PrivateCharter extends CommercialJet {
     private int requiredPremiumRations;
 
-    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int requiredPremiumRations) {
-        super(requiredFuel, turnaroundTime, requiredCrew, requiredBaggage, requiredRations);
+    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int requiredPremiumRations, int revenueGenerated) {
+        super(requiredFuel, turnaroundTime, requiredCrew, requiredBaggage, requiredRations, revenueGenerated);
         this.requiredPremiumRations = requiredPremiumRations;
     }
 
