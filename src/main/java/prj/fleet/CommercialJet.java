@@ -9,8 +9,8 @@ public class CommercialJet extends Aircraft {
     private int requiredBaggage;
     private int requiredRations;  // meal
 
-    public CommercialJet(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations) {
-        super(requiredFuel, turnaroundTime, requiredCrew);
+    public CommercialJet(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int revenueGenerated) {
+        super(requiredFuel, turnaroundTime, requiredCrew, revenueGenerated);
         this.requiredBaggage = requiredBaggage;
         this.requiredRations = requiredRations;
     }

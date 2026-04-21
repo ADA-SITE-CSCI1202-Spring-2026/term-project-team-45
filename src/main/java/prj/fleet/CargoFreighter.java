@@ -8,8 +8,8 @@ import java.util.Random;
 public class CargoFreighter extends Aircraft {
     private int requiredCargoCrates;
 
-    public CargoFreighter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredCargoCrates) {
-        super(requiredFuel, turnaroundTime, requiredCrew);
+    public CargoFreighter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredCargoCrates, int revenueGenerated) {
+        super(requiredFuel, turnaroundTime, requiredCrew, revenueGenerated);
         this.requiredCargoCrates = requiredCargoCrates;
     }
 
