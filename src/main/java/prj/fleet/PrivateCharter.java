@@ -6,29 +6,15 @@ import java.util.Map;
 import java.util.Random;
 
 public class PrivateCharter extends CommercialJet {
-    private int requiredLuxuryItems;
     private int requiredPremiumRations;
 
-    public PrivateCharter(int requiredFuel, int turnaroundTime,int requiredCrew,int requiredLuxuryItems,int requiredPremiumRations){
-        super(requiredFuel, turnaroundTime,requiredCrew);
-        this.requiredLuxuryItems=requiredLuxuryItems;
-        this.requiredPremiumRations=requiredPremiumRations;
-    }
-
-    public int getRequiredLuxuryItems() {
-        return requiredLuxuryItems;
+    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int requiredPremiumRations) {
+        super(requiredFuel, turnaroundTime, requiredCrew, requiredBaggage, requiredRations);
+        this.requiredPremiumRations = requiredPremiumRations;
     }
 
     public int getRequiredPremiumRations() {
-        return requiredPremiumRations;
-    }
-
-    public void setRequiredLuxuryItems(int requiredLuxuryItems) {
-        this.requiredLuxuryItems = requiredLuxuryItems;
-    }
-
-    public void setRequiredPremiumRations(int requiredPremiumRations) {
-        this.requiredPremiumRations = requiredPremiumRations;
+        return this.requiredPremiumRations;
     }
 
     @Override
@@ -42,10 +28,15 @@ public class PrivateCharter extends CommercialJet {
         // Assign the model at the index as the model of the aircraft
         setAircraftModel(modelList[listNumber]);
     }
+
+    @Override
+    public String getAircraftType() {
+        return "Private Charter";
+    }
+
     @Override
     public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL,getRequiredFuel(),SupplyItem.CREW,
-                getRequiredCrew(),SupplyItem.MEAL, requiredPremiumRations,SupplyItem.LUXURY_ITEMS,requiredLuxuryItems);
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, getRequiredRations(), SupplyItem.LUGGAGE, getRequiredBaggage(), SupplyItem.LUXURY_MEAL, requiredPremiumRations);
     }
 }
 

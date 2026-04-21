@@ -12,7 +12,6 @@ public abstract class Aircraft {
     private int turnaroundTime;
     private int requiredCrew;
 
-
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
 
@@ -23,7 +22,7 @@ public abstract class Aircraft {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
         this.turnaroundTime = turnaroundTime;
-        this.requiredCrew=requiredCrew;
+        this.requiredCrew = requiredCrew;
     }
 
     // Getter methods are set as public as the "world" might require access to the information
@@ -40,8 +39,9 @@ public abstract class Aircraft {
         return this.turnaroundTime;
     }
 
-
-    public int getRequiredCrew(){ return this.requiredCrew;}
+    public int getRequiredCrew() {
+        return this.requiredCrew;
+    }
 
     public String getAircraftModel() {
         // Ensure that a null String is interpreted as an unknown model aircraft
@@ -52,31 +52,40 @@ public abstract class Aircraft {
         return this.aircraftModel;
     }
 
-    // Setter methods are set public as the "world" might change them but could be removed depending on lack of need or security of the program
-
-    public void setFlightNumber(int flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public void setRequiredFuel(int requiredFuel) {
-        this.requiredFuel = requiredFuel;
-    }
-
-    public void setTurnaroundTime(int turnaroundTime) {
-        this.turnaroundTime = turnaroundTime;
-    }
-
-    public void setRequiredCrew(int requiredBaggage) {
-        this.requiredCrew = requiredCrew;
-    }
-
-
+    // Setters are not required
 
     // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
     void setAircraftModel(String aircraftModel) {
         this.aircraftModel = aircraftModel;
     }
 
+    public Map<SupplyItem, Integer> getResources() {
+        return Map.of(SupplyItem.FUEL, requiredFuel, SupplyItem.CREW, requiredCrew);
+    }
+
+    public String generateDemandedResources() {
+        SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.MEAL, SupplyItem.CREW, SupplyItem.CARGO, SupplyItem.LUXURY_MEAL, SupplyItem.LUGGAGE};
+        StringBuilder requiredResourcesText = new StringBuilder();
+        String EnumToString = "";
+
+        for (SupplyItem item: tempResourcesList) {
+            if (getResources().get(item) != null && getResources().get(item) > 0) {
+                switch (item) {
+                    case SupplyItem.FUEL -> EnumToString = "Fuel";
+                    case SupplyItem.MEAL -> EnumToString = "Meal";
+                    case SupplyItem.CARGO -> EnumToString = "Cargo";
+                    case SupplyItem.CREW -> EnumToString = "Crew";
+                    case SupplyItem.LUGGAGE -> EnumToString = "Luggage";
+                    case SupplyItem.LUXURY_MEAL -> EnumToString = "Luxury Meal";
+                }
+
+                requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
+            }
+        }
+
+        return requiredResourcesText.toString();
+    }
+
     public abstract void generateAndAssignAircraftModel();
-    public abstract Map<SupplyItem,Integer> getResources();
+    public abstract String getAircraftType();
 }

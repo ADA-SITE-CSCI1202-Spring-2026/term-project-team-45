@@ -6,24 +6,20 @@ import java.util.Map;
 import java.util.Random;
 
 public class CargoFreighter extends Aircraft {
-    private int requiredCargoItems;
+    private int requiredCargoCrates;
 
-    public CargoFreighter(int requiredFuel, int turnaroundTime,int requiredCrew,int requiredCargoItems){
-        super(requiredFuel, turnaroundTime,requiredCrew);
-        this.requiredCargoItems=requiredCargoItems;
+    public CargoFreighter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredCargoCrates) {
+        super(requiredFuel, turnaroundTime, requiredCrew);
+        this.requiredCargoCrates = requiredCargoCrates;
     }
 
-    public int getRequiredCargoItems(){
-        return this.requiredCargoItems;
-    }
-
-    public void setRequiredCargoItems(int requiredCargoItems) {
-        this.requiredCargoItems = requiredCargoItems;
+    public int getRequiredCargoCrates() {
+        return this.requiredCargoCrates;
     }
 
     @Override
     public void generateAndAssignAircraftModel() {
-        String[] modelList = {"Boeing 747-8F", "Antonov An-124 Ruslan", "Airbus A330-200F", "Boeing 777F", "ACessna 208 Caravan Cargo"};
+        String[] modelList = {"Boeing 747-8F", "Antonov An-124 Ruslan", "Airbus A330-200F", "Boeing 777F", "Cessna 208 Caravan Cargo"};
 
         // Generate a number between 0 and size of the array to be used to index the array
         Random random = new Random();
@@ -34,12 +30,12 @@ public class CargoFreighter extends Aircraft {
     }
 
     @Override
-    public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL,getRequiredFuel(),SupplyItem.CREW,
-                getRequiredCrew(),SupplyItem.CARGO,requiredCargoItems );
+    public String getAircraftType() {
+        return "Cargo Freighter";
     }
 
-
-
-
+    @Override
+    public Map<SupplyItem,Integer> getResources() {
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.CARGO, requiredCargoCrates);
+    }
 }
