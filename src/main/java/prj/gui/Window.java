@@ -1,5 +1,7 @@
 package prj.gui;
 
+import prj.file.SaveLoadMenu;
+import prj.generator.TaskGenerator;
 import prj.supply.DepotManager;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ public class Window extends JFrame {
     private final int height = 500;
 
     public Window() {
-        super("Ground Operations Dashboard");
+        super("Skyways Tycoon: Ground Operations Dashboard");
         setSize(width, height);
         setLayout(new GridLayout(2, 2));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,12 +23,15 @@ public class Window extends JFrame {
         SupplyZone supplyZone = new SupplyZone();
         RadioZone radioZone = new RadioZone(width, height);
         DepotZone depotZone = new DepotZone();
-
-        Controller controller = new Controller(depotManager, queueZone, supplyZone, radioZone, depotZone);
+        SaveLoadMenu saveLoadMenu = new SaveLoadMenu();
+        TaskGenerator taskGenerator = new TaskGenerator();
 
         add(queueZone);
         add(supplyZone);
         add(radioZone);
         add(depotZone);
+        setJMenuBar(saveLoadMenu);
+
+        Controller controller = new Controller(depotManager, queueZone, supplyZone, radioZone, depotZone, taskGenerator);
     }
 }
