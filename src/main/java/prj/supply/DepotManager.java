@@ -11,17 +11,17 @@ public class DepotManager {
     private final int INITIAL_FUEL = 25000; // In Liters
     private final int INITIAL_MEAL = 10000; // In # of Units
     private final int INITIAL_LUGGAGE = 1000; // In # of Units
-    private final int INITIAL_CARGO = 20; // In Crates
-    private final int INITIAL_LUXURY_MEAL = 0; // In # of Units
-    private final int INITIAL_CREW = 100; // In Person(s)
+    private final int INITIAL_CARGO = 200; // In Crates
+    private final int INITIAL_LUXURY_MEAL = 100; // In # of Units
+    private final int INITIAL_CREW = 30; // In Person(s)
     private final int INITIAL_MONEY = 50000; // In Manats
 
     // Default purchase amount for each resource
     private final int FUEL_BUY_AMOUNT = 10000;
-    private final int MEAL_BUY_AMOUNT = 2000;
+    private final int MEAL_BUY_AMOUNT = 1000;
     private final int LUGGAGE_BUY_AMOUNT = 250;
-    private final int CARGO_BUY_AMOUNT = 10;
-    private final int LUXURY_MEAL_BUY_AMOUNT = 25;
+    private final int CARGO_BUY_AMOUNT = 50;
+    private final int LUXURY_MEAL_BUY_AMOUNT = 40;
     private final int CREW_BUY_AMOUNT = 5;
 
     // Use EnumMap since it is meant to work with Enum, Value maps and initialize an unmodifiable map to store default purchase amount values
