@@ -5,16 +5,22 @@ import prj.supply.SupplyItem;
 import java.util.Map;
 import java.util.Random;
 
-public class PrivateCharter extends CommercialJet {
+public class PrivateCharter extends Aircraft {
     private int requiredPremiumRations;
+    private int requiredBaggage;
 
-    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int requiredPremiumRations) {
-        super(requiredFuel, turnaroundTime, requiredCrew, requiredBaggage, requiredRations);
+    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredPremiumRations,int requiredBaggage) {
+        super(requiredFuel, turnaroundTime, requiredCrew);
         this.requiredPremiumRations = requiredPremiumRations;
+        this.requiredBaggage=requiredBaggage;
     }
 
     public int getRequiredPremiumRations() {
         return this.requiredPremiumRations;
+    }
+
+    public int getRequiredBaggage() {
+        return requiredBaggage;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class PrivateCharter extends CommercialJet {
 
     @Override
     public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, getRequiredRations(), SupplyItem.LUGGAGE, getRequiredBaggage(), SupplyItem.LUXURY_MEAL, requiredPremiumRations);
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.LUXURY_MEAL, getRequiredPremiumRations(), SupplyItem.LUGGAGE, getRequiredBaggage());
     }
 }
 
