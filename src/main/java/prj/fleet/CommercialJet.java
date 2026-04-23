@@ -9,8 +9,8 @@ public class CommercialJet extends Aircraft {
     private int requiredBaggage;
     private int requiredRations;  // meal
 
-    public CommercialJet(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredRations, int revenueGenerated) {
-        super(requiredFuel, turnaroundTime, requiredCrew, revenueGenerated);
+    public CommercialJet(int requiredFuel, int requiredCrew, int requiredBaggage, int requiredRations, int revenueGenerated) {
+        super(requiredFuel, requiredCrew, revenueGenerated);
         this.requiredBaggage = requiredBaggage;
         this.requiredRations = requiredRations;
     }
@@ -42,6 +42,28 @@ public class CommercialJet extends Aircraft {
     @Override
     public Map<SupplyItem,Integer> getResources(){
         return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.MEAL, requiredRations, SupplyItem.LUGGAGE, requiredBaggage);
+    }
+
+    @Override
+    public String generateDemandedResources() {
+        SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.CREW, SupplyItem.MEAL, SupplyItem.LUGGAGE};
+        StringBuilder requiredResourcesText = new StringBuilder();
+        String EnumToString = "";
+
+        for (SupplyItem item: tempResourcesList) {
+            if (getResources().get(item) != null && getResources().get(item) > 0) {
+                switch (item) {
+                    case SupplyItem.FUEL -> EnumToString = "Fuel";
+                    case SupplyItem.MEAL -> EnumToString = "Meal";
+                    case SupplyItem.CREW -> EnumToString = "Crew";
+                    case SupplyItem.LUGGAGE -> EnumToString = "Luggage";
+                }
+
+                requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
+            }
+        }
+
+        return requiredResourcesText.toString();
     }
 }
 

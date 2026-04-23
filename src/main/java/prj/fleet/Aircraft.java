@@ -9,7 +9,6 @@ public abstract class Aircraft {
     private static int idGenerator = 1;
 
     private int requiredFuel;
-    private int turnaroundTime;
     private int requiredCrew;
     private int revenueGenerated;
 
@@ -19,10 +18,9 @@ public abstract class Aircraft {
     // Define the constructor for the common fields of the Aircraft's subclasses
     // Constructor is defined as protected to ensure only related classes can call
 
-    public Aircraft(int requiredFuel, int turnaroundTime, int requiredCrew, int revenueGenerated) {
+    public Aircraft(int requiredFuel, int requiredCrew, int revenueGenerated) {
         this.flightNumber = idGenerator++;
         this.requiredFuel = requiredFuel;
-        this.turnaroundTime = turnaroundTime;
         this.requiredCrew = requiredCrew;
         this.revenueGenerated = revenueGenerated;
     }
@@ -35,10 +33,6 @@ public abstract class Aircraft {
 
     public int getRequiredFuel() {
         return this.requiredFuel;
-    }
-
-    public int getTurnaroundTime() {
-        return this.turnaroundTime;
     }
 
     public int getRequiredCrew() {
@@ -65,32 +59,8 @@ public abstract class Aircraft {
         this.aircraftModel = aircraftModel;
     }
 
-    public Map<SupplyItem, Integer> getResources() {
-        return Map.of(SupplyItem.FUEL, requiredFuel, SupplyItem.CREW, requiredCrew);
-    }
-
-    public String generateDemandedResources() {
-        SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.MEAL, SupplyItem.CREW, SupplyItem.CARGO, SupplyItem.LUXURY_MEAL, SupplyItem.LUGGAGE};
-        StringBuilder requiredResourcesText = new StringBuilder();
-        String EnumToString = "";
-
-        for (SupplyItem item: tempResourcesList) {
-            if (getResources().get(item) != null && getResources().get(item) > 0) {
-                switch (item) {
-                    case SupplyItem.FUEL -> EnumToString = "Fuel";
-                    case SupplyItem.MEAL -> EnumToString = "Meal";
-                    case SupplyItem.CARGO -> EnumToString = "Cargo";
-                    case SupplyItem.CREW -> EnumToString = "Crew";
-                    case SupplyItem.LUGGAGE -> EnumToString = "Luggage";
-                    case SupplyItem.LUXURY_MEAL -> EnumToString = "Luxury Meal";
-                }
-
-                requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
-            }
-        }
-
-        return requiredResourcesText.toString();
-    }
+    public abstract Map<SupplyItem, Integer> getResources();
+    public abstract String generateDemandedResources();
 
     public abstract void generateAndAssignAircraftModel();
     public abstract String getAircraftType();

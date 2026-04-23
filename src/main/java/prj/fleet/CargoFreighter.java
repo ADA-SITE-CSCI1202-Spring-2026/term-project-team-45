@@ -8,8 +8,8 @@ import java.util.Random;
 public class CargoFreighter extends Aircraft {
     private int requiredCargoCrates;
 
-    public CargoFreighter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredCargoCrates, int revenueGenerated) {
-        super(requiredFuel, turnaroundTime, requiredCrew, revenueGenerated);
+    public CargoFreighter(int requiredFuel, int requiredCrew, int requiredCargoCrates, int revenueGenerated) {
+        super(requiredFuel, requiredCrew, revenueGenerated);
         this.requiredCargoCrates = requiredCargoCrates;
     }
 
@@ -37,5 +37,26 @@ public class CargoFreighter extends Aircraft {
     @Override
     public Map<SupplyItem,Integer> getResources() {
         return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.CARGO, requiredCargoCrates);
+    }
+
+    @Override
+    public String generateDemandedResources() {
+        SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.CREW, SupplyItem.CARGO};
+        StringBuilder requiredResourcesText = new StringBuilder();
+        String EnumToString = "";
+
+        for (SupplyItem item: tempResourcesList) {
+            if (getResources().get(item) != null && getResources().get(item) > 0) {
+                switch (item) {
+                    case SupplyItem.FUEL -> EnumToString = "Fuel";
+                    case SupplyItem.CARGO -> EnumToString = "Cargo";
+                    case SupplyItem.CREW -> EnumToString = "Crew";
+                }
+
+                requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
+            }
+        }
+
+        return requiredResourcesText.toString();
     }
 }
