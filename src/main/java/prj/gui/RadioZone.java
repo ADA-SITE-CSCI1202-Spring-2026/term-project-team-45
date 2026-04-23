@@ -98,4 +98,27 @@ public class RadioZone extends JPanel {
             e.printStackTrace();
         }
     }
+
+    public void sendCustomMessage(String msg) {
+        try {
+            radioDoc.insertString(
+                    radioDoc.getLength(),
+                    "INFO: " + msg + "\n",
+                    info
+            );
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+    public void sendMissingResourceMessage(String msg) {
+        try {
+            radioDoc.insertString(
+                    radioDoc.getLength(),
+                    msg + "\n",
+                    error
+            );
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
 }

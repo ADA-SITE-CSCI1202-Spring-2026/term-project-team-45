@@ -5,11 +5,14 @@ package prj.gui;
 // This class encompasses all 4 GUI zones and the Business Logic
 // This class also defines the timer which will generate the Aircraft queue
 
+import prj.fleet.Aircraft;
 import prj.generator.TaskGenerator;
+import prj.groundCrew.*;
 import prj.supply.DepotManager;
 import prj.supply.SupplyItem;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Controller {
     private final DepotManager depotManager;
@@ -33,11 +36,11 @@ public class Controller {
         }
 
         this.supplyGUI.getPurchaseButton().addActionListener(e -> ControlAndUpdateResourcePurchaseControl());
-        this.queueGUI.getClearFlightButton().addActionListener(e -> {
-            depotManager.addMoney(taskGenerator.getLastAircraftOnQueue().getRevenueGenerated());
-            depotGUI.setResourceLabelValue(SupplyItem.MONEY, depotManager.getResourceAmount(SupplyItem.MONEY));
-            queueGUI.removeAircraftFromList();
-        });
+
+
+
+        this.queueGUI.getClearFlightButton().addActionListener(e -> ControlAndUpdateTaskClearance());
+
 
         // TODO: Fix money shown on task is not equal to money added when task is cleared;
 
@@ -63,5 +66,72 @@ public class Controller {
 
     public void ControlAndUpdateTaskClearance() {
 
+        Aircraft aircraft = taskGenerator.getLastAircraftOnQueue();
+        if (aircraft == null) return;
+        boolean canProcess = true;
+        StringBuilder missingResources = new StringBuilder();
+
+        // RESOURCE CHECK
+
+        for (var entry : aircraft.getResources().entrySet()) {
+            if (!depotManager.checkResourceSupply(entry.getKey(), entry.getValue())) {
+                canProcess = false;
+                int available = depotManager.getResourceAmount(entry.getKey());
+                missingResources.append(entry.getKey())
+                        .append(" (need: ")
+                        .append(entry.getValue())
+                        .append(", have: ")
+                        .append(available)
+                        .append("), ");
+            }
+        }
+
+        if (canProcess) {
+            taskGenerator.getAndRemoveLastAircraftOnQueue();
+
+            // POLYMORPHISM
+            List<IGroundService> groundCrews = List.of(
+                    new FuelingTruck(),
+                    new CateringVan(),
+                    new BaggageHandler(),
+                    new CargoLoader(),
+                    new CrewService(),
+                    new LuxuryService()
+            );
+
+            for (IGroundService service : groundCrews) {
+                if (service.canService(aircraft)) {
+                    radioGUI.sendCustomMessage(service.serviceFlight(aircraft));
+                }
+            }
+
+
+            // RESOURCE DEDUCTION
+            for (var entry : aircraft.getResources().entrySet()) {
+
+                depotManager.deductResource(entry.getKey(), entry.getValue());
+                depotGUI.setResourceLabelValue(
+                        entry.getKey(),
+                        depotManager.getResourceAmount(entry.getKey())
+                );
+            }
+
+            // ADDING MONEY
+            depotManager.addMoney(aircraft.getRevenueGenerated());
+
+            depotGUI.setResourceLabelValue(
+                    SupplyItem.MONEY,
+                    depotManager.getResourceAmount(SupplyItem.MONEY)
+            );
+            queueGUI.removeAircraftFromList();
+            radioGUI.sendTaskClearMessage(aircraft);
+
+        } else {
+            radioGUI.sendTaskErrorMessage(aircraft);
+            radioGUI.sendMissingResourceMessage(
+                    "Missing resources for Flight #" + aircraft.getFlightNumber() + ": " + missingResources
+            );
+
+        }
     }
 }

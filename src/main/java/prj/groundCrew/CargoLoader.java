@@ -6,7 +6,7 @@ import prj.supply.SupplyItem;
 public class CargoLoader implements IGroundService {
     @Override
     public boolean canService(Aircraft plane) {
-        return plane.getResources().get(SupplyItem.CARGO) > 0;
+        return plane.getResources().getOrDefault(SupplyItem.CARGO,0) > 0;
     }
 
     @Override
