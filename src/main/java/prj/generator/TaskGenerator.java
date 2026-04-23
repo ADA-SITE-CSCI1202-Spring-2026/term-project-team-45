@@ -10,12 +10,20 @@ public class TaskGenerator {
 
     private final Deque<Aircraft> flightQueue = new ArrayDeque<>();
 
-
     public void generateAndAddAircraftTask() {
         switch(rr.nextInt(3)) {
-            case 0 -> flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401)));
-            case 1 -> flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(501)));
-            case 2 -> flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001),100,rr.nextInt(36),rr.nextInt(5,25),rr.nextInt(2, 21) ));
+            case 0 -> {
+                flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(25000, 35000)));
+                getLastAircraftOnQueue().generateAndAssignAircraftModel();
+            }
+            case 1 -> {
+                flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(501), rr.nextInt(25000, 35000)));
+                getLastAircraftOnQueue().generateAndAssignAircraftModel();
+            }
+            case 2 -> {
+                flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(121), rr.nextInt(201),  rr.nextInt(25000, 35000)));
+                getLastAircraftOnQueue().generateAndAssignAircraftModel();
+            }
         }
     }
 

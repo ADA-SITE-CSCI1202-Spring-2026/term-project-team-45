@@ -1,5 +1,7 @@
 package prj.gui;
 
+import prj.fleet.Aircraft;
+
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
@@ -33,6 +35,7 @@ public class RadioZone extends JPanel {
         // Define the various styles for text such as error showing up as bold and red etc.
         info = radioDisplay.addStyle("Info", null);
         StyleConstants.setForeground(info, Color.BLACK);
+        StyleConstants.setBold(info, true);
         StyleConstants.setFontSize(info, 14);
 
         warning = radioDisplay.addStyle("Warning", null);
@@ -67,6 +70,30 @@ public class RadioZone extends JPanel {
     public void sendPurchaseSuccessMessage() {
         try {
             radioDoc.insertString(radioDoc.getLength(), "SUCCESS: Purchase successful, resource added!\n", success);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendAircraftArrivalMessage(Aircraft aircraft) {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "INFO: " + aircraft.getAircraftModel() + " Flight #" + String.format("%06d",aircraft.getFlightNumber()) + " Arrived\n", info);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendTaskClearMessage(Aircraft aircraft) {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "SUCCESS: " + aircraft.getAircraftModel() + " cleared\n", success);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendTaskErrorMessage(Aircraft aircraft) {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "ERROR: " + aircraft.getAircraftModel() + " clearance failed\n", error);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }

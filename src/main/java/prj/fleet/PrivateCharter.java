@@ -9,18 +9,14 @@ public class PrivateCharter extends Aircraft {
     private int requiredPremiumRations;
     private int requiredBaggage;
 
-    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredPremiumRations,int requiredBaggage) {
-        super(requiredFuel, turnaroundTime, requiredCrew);
+    public PrivateCharter(int requiredFuel, int turnaroundTime, int requiredCrew, int requiredBaggage, int requiredPremiumRations, int revenueGenerated) {
+        super(requiredFuel, turnaroundTime, requiredCrew, revenueGenerated);
         this.requiredPremiumRations = requiredPremiumRations;
-        this.requiredBaggage=requiredBaggage;
+        this.requiredBaggage = requiredBaggage;
     }
 
     public int getRequiredPremiumRations() {
         return this.requiredPremiumRations;
-    }
-
-    public int getRequiredBaggage() {
-        return requiredBaggage;
     }
 
     @Override
@@ -42,7 +38,7 @@ public class PrivateCharter extends Aircraft {
 
     @Override
     public Map<SupplyItem,Integer> getResources(){
-        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.LUXURY_MEAL, getRequiredPremiumRations(), SupplyItem.LUGGAGE, getRequiredBaggage());
+        return Map.of(SupplyItem.FUEL, getRequiredFuel(), SupplyItem.CREW, getRequiredCrew(), SupplyItem.LUGGAGE, requiredBaggage, SupplyItem.LUXURY_MEAL, requiredPremiumRations);
     }
 }
 
