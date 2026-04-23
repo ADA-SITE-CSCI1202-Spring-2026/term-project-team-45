@@ -13,15 +13,15 @@ public class TaskGenerator {
     public void generateAndAddAircraftTask() {
         switch(rr.nextInt(3)) {
             case 0 -> {
-                flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(25000, 35000)));
+                flightQueue.add(new CommercialJet(rr.nextInt(1000, 20001), rr.nextInt(36), rr.nextInt(251), rr.nextInt(401), rr.nextInt(25000, 35000)));
                 getLastAircraftOnQueue().generateAndAssignAircraftModel();
             }
             case 1 -> {
-                flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(501), rr.nextInt(25000, 35000)));
+                flightQueue.add(new CargoFreighter(rr.nextInt(1000, 20001), rr.nextInt(36), rr.nextInt(501), rr.nextInt(25000, 35000)));
                 getLastAircraftOnQueue().generateAndAssignAircraftModel();
             }
             case 2 -> {
-                flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001), 100, rr.nextInt(36), rr.nextInt(121), rr.nextInt(201),  rr.nextInt(25000, 35000)));
+                flightQueue.add(new PrivateCharter(rr.nextInt(1000, 20001), rr.nextInt(36), rr.nextInt(121), rr.nextInt(201),  rr.nextInt(25000, 35000)));
                 getLastAircraftOnQueue().generateAndAssignAircraftModel();
             }
         }
@@ -29,5 +29,9 @@ public class TaskGenerator {
 
     public Aircraft getLastAircraftOnQueue() {
         return flightQueue.peekLast();
+    }
+
+    public Aircraft getAndRemoveLastAircraftOnQueue() {
+        return flightQueue.poll();
     }
 }
