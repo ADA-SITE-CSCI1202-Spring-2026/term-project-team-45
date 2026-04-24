@@ -6,15 +6,11 @@ import java.util.Map;
 import java.util.Random;
 
 public class CargoFreighter extends Aircraft {
-    private int requiredCargoCrates;
+    private final int requiredCargoCrates;
 
     public CargoFreighter(int requiredFuel, int requiredCrew, int requiredCargoCrates, int revenueGenerated) {
         super(requiredFuel, requiredCrew, revenueGenerated);
         this.requiredCargoCrates = requiredCargoCrates;
-    }
-
-    public int getRequiredCargoCrates() {
-        return this.requiredCargoCrates;
     }
 
     @Override

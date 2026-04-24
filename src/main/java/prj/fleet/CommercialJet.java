@@ -6,21 +6,13 @@ import java.util.Map;
 import java.util.Random;
 
 public class CommercialJet extends Aircraft {
-    private int requiredBaggage;
-    private int requiredRations;  // meal
+    private final int requiredBaggage;
+    private final int requiredRations;  // meal
 
     public CommercialJet(int requiredFuel, int requiredCrew, int requiredBaggage, int requiredRations, int revenueGenerated) {
         super(requiredFuel, requiredCrew, revenueGenerated);
         this.requiredBaggage = requiredBaggage;
         this.requiredRations = requiredRations;
-    }
-
-    public int getRequiredBaggage() {
-        return this.requiredBaggage;
-    }
-
-    public int getRequiredRations() {
-        return this.requiredRations;
     }
 
     @Override

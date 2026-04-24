@@ -62,34 +62,6 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
-    public int getFuelAmount() {
-        return airportSupply.get(SupplyItem.FUEL);
-    }
-
-    public int getMealAmount() {
-        return airportSupply.get(SupplyItem.MEAL);
-    }
-
-    public int getLuggageAmount() {
-        return airportSupply.get(SupplyItem.LUGGAGE);
-    }
-
-    public int getCargoAmount() {
-        return airportSupply.get(SupplyItem.CARGO);
-    }
-
-    public int getLuxuryMealAmount() {
-        return airportSupply.get(SupplyItem.LUXURY_MEAL);
-    }
-
-    public int getCrewAmount() {
-        return airportSupply.get(SupplyItem.CREW);
-    }
-
-    public int getMoneyAmount() {
-        return airportSupply.get(SupplyItem.MONEY);
-    }
-
     // More flexible helper getter to get any resource amount
     public int getResourceAmount(SupplyItem item) {
         return airportSupply.get(item);

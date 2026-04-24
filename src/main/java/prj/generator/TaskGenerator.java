@@ -8,7 +8,7 @@ import java.util.random.RandomGenerator;
 public class TaskGenerator {
     private final RandomGenerator rr = RandomGenerator.of("L64X128MixRandom");
 
-    private final Queue<Aircraft> flightQueue = new ArrayDeque<>();
+    private final Deque<Aircraft> flightQueue = new ArrayDeque<>();
 
     public void generateAndAddAircraftTask() {
         switch(rr.nextInt(3)) {
@@ -27,15 +27,16 @@ public class TaskGenerator {
         }
     }
 
-    public Aircraft getLastAircraftOnQueue() {
-        return flightQueue.peek();
-    }
-
     public Aircraft getFirstAircraftOnQueue() {
-        return flightQueue.peek();
+        return flightQueue.peekFirst();
     }
 
-    public Aircraft removeFirstAircraftFromQueue() {
+    public Aircraft getAndRemoveFirstAircraftFromQueue() {
         return flightQueue.poll();
+    }
+
+    // This method is meant to be read-only value to be used with showing aircraft on the GUI
+    public Aircraft getLastAircraftOnQueue() {
+        return flightQueue.peekLast();
     }
 }

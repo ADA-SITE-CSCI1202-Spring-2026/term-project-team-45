@@ -6,17 +6,13 @@ import java.util.Map;
 import java.util.Random;
 
 public class PrivateCharter extends Aircraft {
-    private int requiredPremiumRations;
-    private int requiredBaggage;
+    private final int requiredPremiumRations;
+    private final int requiredBaggage;
 
     public PrivateCharter(int requiredFuel, int requiredCrew, int requiredBaggage, int requiredPremiumRations, int revenueGenerated) {
         super(requiredFuel, requiredCrew, revenueGenerated);
         this.requiredPremiumRations = requiredPremiumRations;
         this.requiredBaggage = requiredBaggage;
-    }
-
-    public int getRequiredPremiumRations() {
-        return this.requiredPremiumRations;
     }
 
     @Override

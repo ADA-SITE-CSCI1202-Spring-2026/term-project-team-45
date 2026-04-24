@@ -12,6 +12,6 @@ public class LuxuryService implements IGroundService{
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Luxury service provided " + plane.getResources().get(SupplyItem.LUXURY_MEAL)
-                + " luxury items to the airplane " + plane.getFlightNumber() + ".";
+                + " luxury items to the airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
     }
 }

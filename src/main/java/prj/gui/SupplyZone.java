@@ -1,10 +1,8 @@
 package prj.gui;
 
-import prj.supply.DepotManager;
 import prj.supply.SupplyItem;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SupplyZone extends JPanel {
     // This array is meant to ensure that the MONEY enum does not appear as a purchasable option in the JComboBox dropdown menu

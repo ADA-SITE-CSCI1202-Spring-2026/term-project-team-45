@@ -26,9 +26,7 @@ public class QueueZone extends JPanel {
         // JButton is sized based on MaximumSize
         clearFlightButton.setMaximumSize(new Dimension(displayWidth, 20));
         clearFlightButton.setAlignmentX(CENTER_ALIGNMENT);
-        //executeTask.setContentAreaFilled(false);
         clearFlightButton.setFocusPainted(false);
-        //executeTask.setBackground(Color.BLACK);
 
         add(clearFlightButton);
     }
@@ -43,8 +41,6 @@ public class QueueZone extends JPanel {
         tempTask.setLayout(new BoxLayout(tempTask, BoxLayout.Y_AXIS));
         tempTask.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         tempTask.setMaximumSize(new Dimension(displayWidth, 35));
-
-        //aircraft.generateAndAssignAircraftModel();
 
         // Add the aircraft model and type into the GUI
         JLabel tempAircraftInfo = new JLabel(aircraft.getAircraftType() + ": " + aircraft.getAircraftModel());

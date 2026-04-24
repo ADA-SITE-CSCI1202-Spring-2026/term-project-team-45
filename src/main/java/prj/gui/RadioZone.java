@@ -3,10 +3,7 @@ package prj.gui;
 import prj.fleet.Aircraft;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 import java.awt.*;
 
 public class RadioZone extends JPanel {
@@ -27,10 +24,12 @@ public class RadioZone extends JPanel {
                 return true;
             }
         };
-        //radioDisplay.setText("Welcome Chief! You have a tiring job ahead.");
         radioDisplay.setEditable(false);
         radioDisplay.setBackground(new Color(192, 192, 192));
         radioDoc = radioDisplay.getStyledDocument();
+
+        DefaultCaret caret = (DefaultCaret) radioDisplay.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
         // Define the various styles for text such as error showing up as bold and red etc.
         info = radioDisplay.addStyle("Info", null);

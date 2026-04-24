@@ -12,6 +12,6 @@ public class CargoLoader implements IGroundService {
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Cargo Loader loaded " + plane.getResources().get(SupplyItem.CARGO)
-                + " parcels onto airplane " + plane.getFlightNumber() + ".";
+                + " parcels onto airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
     }
 }
