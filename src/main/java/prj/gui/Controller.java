@@ -66,7 +66,7 @@ public class Controller {
 
     public void ControlAndUpdateTaskClearance() {
 
-        Aircraft aircraft = taskGenerator.getLastAircraftOnQueue();
+        Aircraft aircraft = taskGenerator.getFirstAircraftOnQueue();
         if (aircraft == null) return;
         boolean canProcess = true;
         StringBuilder missingResources = new StringBuilder();
@@ -87,7 +87,7 @@ public class Controller {
         }
 
         if (canProcess) {
-            taskGenerator.getAndRemoveLastAircraftOnQueue();
+            taskGenerator.removeFirstAircraftFromQueue();
 
             // POLYMORPHISM
             List<IGroundService> groundCrews = List.of(

@@ -32,6 +32,14 @@ public class TaskGenerator {
     }
 
     public Aircraft getAndRemoveLastAircraftOnQueue() {
+        return flightQueue.pollLast();
+    }
+
+    public Aircraft getFirstAircraftOnQueue() {
+        return flightQueue.peek();
+    }
+
+    public Aircraft removeFirstAircraftFromQueue() {
         return flightQueue.poll();
     }
 }
