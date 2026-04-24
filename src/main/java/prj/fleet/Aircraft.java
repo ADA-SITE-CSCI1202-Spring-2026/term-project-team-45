@@ -5,12 +5,12 @@ import prj.supply.SupplyItem;
 import java.util.Map;
 
 public abstract class Aircraft {
-    private int flightNumber;
+    private final int flightNumber;
     private static int idGenerator = 1;
 
-    private int requiredFuel;
-    private int requiredCrew;
-    private int revenueGenerated;
+    private final int requiredFuel;
+    private final int requiredCrew;
+    private final int revenueGenerated;
 
     // This field must only be assigned a value after the constructor call has been made as it is difficult/unnecessary to generate a model midst constructor call
     private String aircraftModel;
