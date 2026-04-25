@@ -39,4 +39,16 @@ public class TaskGenerator {
     public Aircraft getLastAircraftOnQueue() {
         return flightQueue.peekLast();
     }
+
+    public Deque<Aircraft> getFlightQueue() {
+        return flightQueue;
+    }
+
+    public void resetAircraftQueue() {
+        flightQueue.clear();
+    }
+
+    public void repopulateAircraftQueue(Deque<Aircraft> flightQueue) {
+        this.flightQueue.addAll(flightQueue);
+    }
 }

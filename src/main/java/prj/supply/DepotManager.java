@@ -62,6 +62,10 @@ public class DepotManager {
         airportSupply.put(SupplyItem.MONEY, INITIAL_MONEY);
     }
 
+    public void repopulateAirportSupply(Map<SupplyItem, Integer> airportSupply) {
+        this.airportSupply.putAll(airportSupply);
+    }
+
     // More flexible helper getter to get any resource amount
     public int getResourceAmount(SupplyItem item) {
         return airportSupply.get(item);
