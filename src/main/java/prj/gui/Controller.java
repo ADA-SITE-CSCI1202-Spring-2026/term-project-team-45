@@ -32,7 +32,7 @@ public class Controller {
         this.taskGenerator = taskGenerator;
 
         for (SupplyItem item : SupplyItem.values()) {
-            this.depotGUI.setResourceLabelValue(item, depotManager.getResourceAmount(item));
+            this.depotGUI.setResourceLabelValue(item, this.depotManager.getResourceAmount(item));
         }
 
         this.supplyGUI.getPurchaseButton().addActionListener(e -> ControlAndUpdateResourcePurchaseControl());
@@ -41,9 +41,9 @@ public class Controller {
 
         // Generate a new aircraft task every 3000ms (3s)
         taskTimer = new Timer(3000, e -> {
-            taskGenerator.generateAndAddAircraftTask();
-            queueGUI.getAircraftListAndAdd(taskGenerator.getLastAircraftOnQueue());
-            radioGUI.sendAircraftArrivalMessage(taskGenerator.getLastAircraftOnQueue());
+            this.taskGenerator.generateAndAddAircraftTask();
+            this.queueGUI.getAircraftListAndAdd(this.taskGenerator.getLastAircraftOnQueue());
+            this.radioGUI.sendAircraftArrivalMessage(this.taskGenerator.getLastAircraftOnQueue());
         });
         taskTimer.start();
     }
