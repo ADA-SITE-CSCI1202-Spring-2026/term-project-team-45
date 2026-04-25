@@ -36,13 +36,25 @@ public class CargoFreighter extends Aircraft {
     }
 
     @Override
-    public String generateDemandedResources() {
+    public String generateDemandedResources(boolean isForFileOperations) {
         SupplyItem[] tempResourcesList = {SupplyItem.FUEL, SupplyItem.CREW, SupplyItem.CARGO};
         StringBuilder requiredResourcesText = new StringBuilder();
         String EnumToString = "";
 
-        for (SupplyItem item: tempResourcesList) {
-            if (getResources().get(item) != null && getResources().get(item) > 0) {
+        if (!isForFileOperations) {
+            for (SupplyItem item: tempResourcesList) {
+                if (getResources().get(item) > 0) {
+                    switch (item) {
+                        case SupplyItem.FUEL -> EnumToString = "Fuel";
+                        case SupplyItem.CARGO -> EnumToString = "Cargo";
+                        case SupplyItem.CREW -> EnumToString = "Crew";
+                    }
+
+                    requiredResourcesText.append(EnumToString).append(": ").append(getResources().get(item)).append(", ");
+                }
+            }
+        } else {
+            for (SupplyItem item: tempResourcesList) {
                 switch (item) {
                     case SupplyItem.FUEL -> EnumToString = "Fuel";
                     case SupplyItem.CARGO -> EnumToString = "Cargo";

@@ -55,12 +55,19 @@ public abstract class Aircraft {
     // Setters are not required
 
     // Default access modifier as it has the lowest level access which allows access from child classes from the same package (private doesn't work)
-    void setAircraftModel(String aircraftModel) {
+    public void setAircraftModel(String aircraftModel) {
         this.aircraftModel = aircraftModel;
     }
 
+    public static void resetIdGenerator() {
+        idGenerator = 1;
+    }
+
     public abstract Map<SupplyItem, Integer> getResources();
-    public abstract String generateDemandedResources();
+
+    // If boolean is true it will generate an alternate String that is suited for saving and loading data
+    // the alternate String differs in that it also shows resources that have 0 demand by the respective aircraft
+    public abstract String generateDemandedResources(boolean isForFileOperations);
 
     public abstract void generateAndAssignAircraftModel();
     public abstract String getAircraftType();
