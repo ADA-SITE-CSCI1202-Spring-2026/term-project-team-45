@@ -120,4 +120,8 @@ public class RadioZone extends JPanel {
             e.printStackTrace();
         }
     }
+
+    public void clearRadioDisplay() {
+        radioDisplay.setText(null);
+    }
 }

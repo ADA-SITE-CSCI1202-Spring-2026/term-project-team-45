@@ -48,7 +48,7 @@ public class QueueZone extends JPanel {
         tempTask.add(tempAircraftInfo);
 
         // Add the resources demanded by the aircraft into the GUI
-        JLabel tempResourceInfo = new JLabel(aircraft.generateDemandedResources() + "Money: " + aircraft.getRevenueGenerated() + "₼");
+        JLabel tempResourceInfo = new JLabel(aircraft.generateDemandedResources(false) + "Money: " + aircraft.getRevenueGenerated() + "₼");
         tempResourceInfo.setAlignmentX(CENTER_ALIGNMENT);
         tempTask.add(tempResourceInfo);
         aircraftList.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -67,5 +67,11 @@ public class QueueZone extends JPanel {
             revalidate();
             repaint();
         }
+    }
+
+    public void clearAircraftListPanel() {
+        aircraftList.removeAll();
+        revalidate();
+        repaint();
     }
 }
