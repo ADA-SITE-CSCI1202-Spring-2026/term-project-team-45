@@ -32,23 +32,18 @@ public class Controller {
         this.taskGenerator = taskGenerator;
 
         for (SupplyItem item : SupplyItem.values()) {
-            this.depotGUI.setResourceLabelValue(item, depotManager.getResourceAmount(item));
+            this.depotGUI.setResourceLabelValue(item, this.depotManager.getResourceAmount(item));
         }
 
         this.supplyGUI.getPurchaseButton().addActionListener(e -> ControlAndUpdateResourcePurchaseControl());
 
-
-
         this.queueGUI.getClearFlightButton().addActionListener(e -> ControlAndUpdateTaskClearance());
-
-
-        // TODO: Fix money shown on task is not equal to money added when task is cleared;
 
         // Generate a new aircraft task every 3000ms (3s)
         taskTimer = new Timer(3000, e -> {
-            taskGenerator.generateAndAddAircraftTask();
-            queueGUI.getAircraftListAndAdd(taskGenerator.getLastAircraftOnQueue());
-            radioGUI.sendAircraftArrivalMessage(taskGenerator.getLastAircraftOnQueue());
+            this.taskGenerator.generateAndAddAircraftTask();
+            this.queueGUI.getAircraftListAndAdd(this.taskGenerator.getLastAircraftOnQueue());
+            this.radioGUI.sendAircraftArrivalMessage(this.taskGenerator.getLastAircraftOnQueue());
         });
         taskTimer.start();
     }
@@ -65,7 +60,6 @@ public class Controller {
     }
 
     public void ControlAndUpdateTaskClearance() {
-
         Aircraft aircraft = taskGenerator.getFirstAircraftOnQueue();
         if (aircraft == null) return;
         boolean canProcess = true;
@@ -87,7 +81,7 @@ public class Controller {
         }
 
         if (canProcess) {
-            taskGenerator.removeFirstAircraftFromQueue();
+            taskGenerator.getAndRemoveFirstAircraftFromQueue();
 
             // POLYMORPHISM
             List<IGroundService> groundCrews = List.of(
@@ -129,7 +123,7 @@ public class Controller {
         } else {
             radioGUI.sendTaskErrorMessage(aircraft);
             radioGUI.sendMissingResourceMessage(
-                    "Missing resources for Flight #" + aircraft.getFlightNumber() + ": " + missingResources
+                    "Missing resources for Flight #" + String.format("%06d",aircraft.getFlightNumber()) + ": " + missingResources
             );
 
         }

@@ -12,7 +12,7 @@ public class BaggageHandler implements IGroundService {
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Baggage Handler loaded " + plane.getResources().get(SupplyItem.LUGGAGE)
-                + " carts onto " + plane.getFlightNumber() + ".";
+                + " carts onto airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
 
     }
 }

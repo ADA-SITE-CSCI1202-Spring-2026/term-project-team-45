@@ -12,6 +12,6 @@ public class CrewService implements IGroundService {
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Crew Service dispatched a crew of " + plane.getResources().get(SupplyItem.CREW)
-                + " to airplane " + plane.getFlightNumber() + ".";
+                + " to airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
     }
 }

@@ -12,6 +12,6 @@ public class CateringVan implements IGroundService{
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Catering Van loaded " + plane.getResources().get(SupplyItem.MEAL)
-                + " meals onto " + plane.getFlightNumber() + ".";
+                + " meals onto airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
     }
 }

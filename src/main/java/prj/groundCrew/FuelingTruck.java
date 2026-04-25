@@ -12,7 +12,7 @@ public class FuelingTruck implements IGroundService{
     @Override
     public String serviceFlight(Aircraft plane) {
         return "Fueling Truck pumped " + plane.getResources().get(SupplyItem.FUEL)
-                + "L of jet fuel into " + plane.getFlightNumber() + ".";
+                + "L of jet fuel into airplane #" + String.format("%06d",plane.getFlightNumber()) + ".";
     }
 
 }
