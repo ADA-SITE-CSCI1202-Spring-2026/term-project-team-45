@@ -1,6 +1,6 @@
 package prj.gui;
 
-//import prj.file.SaveLoadMenu;
+import prj.file.SaveLoadMenu;
 import prj.generator.TaskGenerator;
 import prj.supply.DepotManager;
 
@@ -23,14 +23,16 @@ public class Window extends JFrame {
         SupplyZone supplyZone = new SupplyZone();
         RadioZone radioZone = new RadioZone(width, height);
         DepotZone depotZone = new DepotZone();
-        //SaveLoadMenu saveLoadMenu = new SaveLoadMenu();
+
+        SaveLoadMenu saveLoadMenu = new SaveLoadMenu();
+
         TaskGenerator taskGenerator = new TaskGenerator();
 
         add(queueZone);
         add(supplyZone);
         add(radioZone);
         add(depotZone);
-        //setJMenuBar(saveLoadMenu);
+        setJMenuBar(saveLoadMenu);
 
         Controller controller = new Controller(depotManager, queueZone, supplyZone, radioZone, depotZone, taskGenerator);
     }
