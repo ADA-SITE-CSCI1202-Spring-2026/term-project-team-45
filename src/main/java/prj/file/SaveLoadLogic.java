@@ -32,4 +32,68 @@ public class SaveLoadLogic {
             e.printStackTrace();
         }
     }
+
+    public void LoadState(DepotManager depotManager, DepotZone depotZone, TaskGenerator taskGenerator, QueueZone queueZone, RadioZone radioZone) {
+        try (BufferedReader br = new BufferedReader(new FileReader("savedState.txt"))) {
+            String line;
+
+            // reset the queue to make sure when a state is loaded 2nd time it does not add to the previous load's state
+            loadStateAircraftQueue.clear();
+            Aircraft.resetIdGenerator();
+
+            // Read out DEPOT BEGIN
+            br.readLine();
+            while ((line = br.readLine()) != null && !line.equals("DEPOT END")) {
+                String[] resourceArray = line.split(": ");
+                loadStateResourceMap.put(SupplyItem.valueOf(resourceArray[0]), Integer.valueOf(resourceArray[1]));
+            }
+            // Read out DEPOT END
+
+            br.readLine(); // Read out newline
+
+            // Read out QUEUE BEGIN
+            br.readLine();
+            while ((line = br.readLine()) != null && !line.equals("QUEUE END")) {
+                String[] queueArray = line.split(": |, ");
+
+                switch(queueArray[0]) {
+                    case "Commercial Jet" -> {
+                        loadStateAircraftQueue.add(new CommercialJet(Integer.parseInt(queueArray[3]), Integer.parseInt(queueArray[5]),
+                                Integer.parseInt(queueArray[9]), Integer.parseInt(queueArray[7]), Integer.parseInt(queueArray[11])));
+                        loadStateAircraftQueue.peekLast().setAircraftModel(queueArray[1]);
+                    }
+                    case "Cargo Freighter" -> {
+                        loadStateAircraftQueue.add(new CargoFreighter(Integer.parseInt(queueArray[3]), Integer.parseInt(queueArray[5]),
+                                Integer.parseInt(queueArray[7]), Integer.parseInt(queueArray[9])));
+                        loadStateAircraftQueue.peekLast().setAircraftModel(queueArray[1]);
+                    }
+                    case "Private Charter" -> {
+                        loadStateAircraftQueue.add(new PrivateCharter(Integer.parseInt(queueArray[3]), Integer.parseInt(queueArray[5]),
+                                Integer.parseInt(queueArray[9]), Integer.parseInt(queueArray[7]), Integer.parseInt(queueArray[11])));
+                        loadStateAircraftQueue.peekLast().setAircraftModel(queueArray[1]);
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Reassign values from the new temporary loadStateMap to the Depot manager map and change the values on the GUI
+        depotManager.repopulateAirportSupply(loadStateResourceMap);
+        for (SupplyItem item: SupplyItem.values()) {
+            depotZone.setResourceLabelValue(item, depotManager.getResourceAmount(item));
+        }
+
+        // Clear Aircraft queue and assign from the load state
+        taskGenerator.resetAircraftQueue();
+        taskGenerator.repopulateAircraftQueue(loadStateAircraftQueue);
+
+        // Clear the GUI panel and re-state the necessary aircraft
+        queueZone.clearAircraftListPanel();
+        radioZone.clearRadioDisplay();
+        for (Aircraft aircraft: taskGenerator.getFlightQueue()) {
+            queueZone.getAircraftListAndAdd(aircraft);
+        }
+    }
 }
