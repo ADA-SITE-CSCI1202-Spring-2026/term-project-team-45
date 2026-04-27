@@ -109,6 +109,7 @@ public class RadioZone extends JPanel {
             e.printStackTrace();
         }
     }
+
     public void sendMissingResourceMessage(String msg) {
         try {
             radioDoc.insertString(
@@ -116,6 +117,38 @@ public class RadioZone extends JPanel {
                     msg + "\n",
                     error
             );
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendSuccessfulSaveMessage() {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "SUCCESS: Save file successfully created in the root folder (next to README.md and .gitignore files)\n", success);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendFailedSaveMessage() {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "ERROR: Failed to create a save file\n", error);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendSuccessfulLoadMessage() {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "SUCCESS: Save file successfully loaded\n", success);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendFailedLoadMessage() {
+        try {
+            radioDoc.insertString(radioDoc.getLength(), "ERROR: Failed to load save file\n", error);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }

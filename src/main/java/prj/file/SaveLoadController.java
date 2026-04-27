@@ -24,7 +24,7 @@ public class SaveLoadController {
         this.queueZone = queueZone;
         this.radioZone = radioZone;
 
-        this.saveLoadMenu.getSaveItem().addActionListener(e -> this.saveLoadLogic.SaveState(this.depotManager, this.taskGenerator));
+        this.saveLoadMenu.getSaveItem().addActionListener(e -> this.saveLoadLogic.SaveState(this.depotManager, this.taskGenerator, this.radioZone));
         this.saveLoadMenu.getLoadItem().addActionListener(e -> this.saveLoadLogic.LoadState(this.depotManager, this.depotZone, this.taskGenerator, this.queueZone, this.radioZone));
     }
 }
