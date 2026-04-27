@@ -14,7 +14,7 @@ public class SaveLoadLogic {
     private final Map<SupplyItem, Integer> loadStateResourceMap = new EnumMap<>(SupplyItem.class);
     private final Deque<Aircraft> loadStateAircraftQueue = new ArrayDeque<>();
 
-    public void SaveState(DepotManager depotManager, TaskGenerator taskGenerator) {
+    public void SaveState(DepotManager depotManager, TaskGenerator taskGenerator, RadioZone radioZone) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("savedState.txt", false))) {
             writer.println("DEPOT BEGIN");
             for (SupplyItem item: SupplyItem.values()) {
@@ -28,7 +28,10 @@ public class SaveLoadLogic {
             }
             writer.println("QUEUE END");
 
+            radioZone.sendSuccessfulSaveMessage();
+
         } catch (IOException e) {
+            radioZone.sendFailedSaveMessage();
             e.printStackTrace();
         }
     }
@@ -75,25 +78,28 @@ public class SaveLoadLogic {
                 }
             }
 
+            // Reassign values from the new temporary loadStateMap to the Depot manager map and change the values on the GUI
+            depotManager.repopulateAirportSupply(loadStateResourceMap);
+            for (SupplyItem item: SupplyItem.values()) {
+                depotZone.setResourceLabelValue(item, depotManager.getResourceAmount(item));
+            }
+
+            // Clear Aircraft queue and assign from the load state
+            taskGenerator.resetAircraftQueue();
+            taskGenerator.repopulateAircraftQueue(loadStateAircraftQueue);
+
+            // Clear the GUI panel and re-state the necessary aircraft
+            queueZone.clearAircraftListPanel();
+            radioZone.clearRadioDisplay();
+            for (Aircraft aircraft: taskGenerator.getFlightQueue()) {
+                queueZone.getAircraftListAndAdd(aircraft);
+            }
+
+            radioZone.sendSuccessfulLoadMessage();
+
         } catch (IOException e) {
+            radioZone.sendFailedLoadMessage();
             e.printStackTrace();
-        }
-
-        // Reassign values from the new temporary loadStateMap to the Depot manager map and change the values on the GUI
-        depotManager.repopulateAirportSupply(loadStateResourceMap);
-        for (SupplyItem item: SupplyItem.values()) {
-            depotZone.setResourceLabelValue(item, depotManager.getResourceAmount(item));
-        }
-
-        // Clear Aircraft queue and assign from the load state
-        taskGenerator.resetAircraftQueue();
-        taskGenerator.repopulateAircraftQueue(loadStateAircraftQueue);
-
-        // Clear the GUI panel and re-state the necessary aircraft
-        queueZone.clearAircraftListPanel();
-        radioZone.clearRadioDisplay();
-        for (Aircraft aircraft: taskGenerator.getFlightQueue()) {
-            queueZone.getAircraftListAndAdd(aircraft);
         }
     }
 }
