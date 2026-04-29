@@ -19,4 +19,4 @@
 
 ## The save file is saved in the Current Working Directory (Usually the same directory the program is run from)
 ## e.g when you run the "java -cp out prj.Main" command from the "src/main/java" and save, the save file will be created in "src/main/java"
-## e.g when you run java -jar term-project-team-45.jar" command from the same directory as the jar file is in and save, the save file will be created in the same directory
+## e.g when you run the "java -jar term-project-team-45.jar" command from the same directory as the jar file is in and save, the save file will be created in the same directory
