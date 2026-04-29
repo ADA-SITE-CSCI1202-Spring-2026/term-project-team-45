@@ -124,7 +124,7 @@ public class RadioZone extends JPanel {
 
     public void sendSuccessfulSaveMessage() {
         try {
-            radioDoc.insertString(radioDoc.getLength(), "SUCCESS: Save file successfully created in the root folder (next to README.md and .gitignore files)\n", success);
+            radioDoc.insertString(radioDoc.getLength(), "SUCCESS: Save file successfully created\n", success);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
